@@ -1,0 +1,80 @@
+page-records {
+
+  .record-title{
+    text-align:center;
+    font-size: 130%;
+    font-weight: bold;
+    padding: 8px;
+  }
+  .center{
+    text-align:center;
+  }
+
+  .left{
+    text-align:left;
+  }
+
+  .right{
+    text-align:left;
+  }
+
+  table.gridtable {
+    font-family: verdana,arial,sans-serif;
+    font-size:12px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  table.gridtable th {
+    border-width: 1px;
+    padding: 4px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #d2d2d2;
+  }
+  table.gridtable td {
+    border-width: 1px;
+    padding: 4px;
+    border-style: solid;
+    border-color: #666666;
+  }
+
+  table.gridtable tr:nth-child(odd) {
+    background-color: #dddddd;
+  }
+
+  .inside-title{
+    font-family: verdana,arial,sans-serif;
+    font-size: 100%;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  .select-title{
+    font-family: verdana, arial, sans-serif;
+    text-transform: capitalize;
+  }
+
+  .ion-label{
+    font-family: verdana,arial,sans-serif;
+    font-size: 90%;
+    text-transform: capitalize;
+  }
+
+  .customer-name{
+    text-align:center;
+    font-size: 130%;
+    font-weight: bold;
+  }
+
+  .div-color{
+    background-color: #aafff5;
+  }
+
+  .No{
+    background-color: rgba(58, 255, 0, 0.38);
+  }
+
+}

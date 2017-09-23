@@ -1,0 +1,71 @@
+// http://ionicframework.com/docs/v2/theming/
+
+.fullscreenDiv {
+  background-color: #ffffff;
+  width: 100%;
+  height: auto;
+  bottom: 50px;
+  font-size: 145%;
+  top: 50px;
+  text-align: center;
+  left: 50;
+  position: absolute;
+  z-index: 0;
+  padding: 100px;
+}
+
+
+.loader {
+  border: 10px solid #f3f3f3;
+  border-radius: 80%;
+  border-top: 10px solid #3498db;
+  width: 80px;
+  height: 80px;
+  margin: auto;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.menu-button{
+  background-color: rgba(0, 0, 0, 0.76);
+  color: white;
+  padding: 20px;
+  font-family: verdana, arial, sans-serif;
+}
+
+.menu-title{
+//  background-color: rgba(0, 0, 0, 0.80);
+  color: white;
+  width: 100%;
+  padding: 15px;
+  font-family: verdana, arial, sans-serif;
+}
+
+/*.center {
+  margin: auto;
+  width: 60%;
+}*/
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.

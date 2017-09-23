@@ -1,0 +1,185 @@
+<!--
+  Generated template for the Stock page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color = 'title-bar'>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Stock</ion-title>
+    </ion-navbar>
+    <div padding>
+        <ion-segment [(ngModel)]="stockSegments">
+
+        <ion-segment-button value="addStock">
+            Add New Stock
+        </ion-segment-button>
+
+        <ion-segment-button value="updateStocks">
+            Update Stock
+        </ion-segment-button>
+
+        <ion-segment-button value="viewStocks">
+            View All Stock
+        </ion-segment-button>
+
+        </ion-segment>
+    </div>
+</ion-header>
+
+
+<ion-content>
+
+
+
+    <div [ngSwitch]="stockSegments">
+
+    <!-- newStock :: START-->
+
+    <ion-list *ngSwitchCase="'addStock'">
+
+            <ion-item>
+                <fieldset style="background-color: rgba(0, 0, 0, 0.04)">
+                    <legend>...</legend>
+                    <div class= "center">
+                        <div style="font-size: 110%">Add New Stock</div>
+                        <br>
+                        <table>
+                            <tr>
+                                <td><label for="gauge" class="input-label">Enter Gauge </label></td>
+                                <td><input type="number" id="gauge" [(ngModel)]="gauge"></td>
+                            </tr>
+
+                            <tr>
+                                <td><label for="weight" class="input-label">Enter Weight</label></td>
+                                <td><input type="number" id="weight" [(ngModel)]="weight"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <br>
+
+                <div class= "center">
+                    <button class="btn" (click) = 'saveStock()'>Save</button>
+                </div>
+
+                </fieldset>
+
+            </ion-item>
+
+            <ion-item>
+                <div class= "center" *ngIf="stockSaved">
+                        <br>
+                    New Stock Added!
+                        <br><br>
+                    It Can Be Found in <b>View All Stock</b> Tab
+                </div>
+            </ion-item>
+
+    </ion-list>
+
+    <!-- newStock :: END-->
+
+
+    <!-- update stock :: START-->
+    <ion-list *ngSwitchCase="'updateStocks'">
+    <!--select start-->
+    <ion-item>
+        <ion-label>Select Gauge</ion-label>
+        <ion-select interface = 'popover' [(ngModel)]="selectedGaugeForUpdate">
+
+        <div *ngFor="let gauge of gaugeArray">
+        <ion-option>
+            {{gauge}}
+        </ion-option>
+        </div>
+
+        </ion-select>
+    </ion-item>
+
+
+    <div *ngIf = "selectedGaugeForUpdate">
+
+        <ion-item>
+            <fieldset style="background-color: rgba(0, 0, 0, 0.04)">
+                <legend>...</legend>
+            <div class= "center">
+                <div style="font-size: 110%">Update Stock</div>
+                <br>
+                <table>
+                    <tr>
+                        <td><label for="weight" class="input-label">Enter Weight </label></td>
+                        <td><input type="number" id="weight" step="0.1" [(ngModel)]="weightForUpdate"></td>
+                    </tr>
+                </table>
+                </div>
+                <br>
+                <div class= "center">
+                    <button class="btn" (click) = 'updateStock(selectedGaugeForUpdate, weightForUpdate, true)'>Update</button>
+                </div>
+            </fieldset>
+        </ion-item>
+
+
+        <br><br><br>
+        <div class="inside-text" style="font-size: 110%">
+            Remaining Stock for {{selectedGaugeForUpdate}}
+        </div>
+        <br>
+        <div class="inside-text" style="font-size: 120%">
+            <b>{{getStockRemainingForSelectedGauge(selectedGaugeForUpdate)}} KG</b>
+        </div>
+
+    </div>
+
+
+    <!--select end-->
+
+    </ion-list>
+    <!-- update stock :: END    -->
+
+
+    <!-- View All Stock :: START-->
+
+    <ion-list *ngSwitchCase="'viewStocks'">
+
+    <ion-item>
+        <table class="gridtable" *ngIf="stock">
+        <tr>
+            <th>Gauge</th>
+            <th>Remaining Stock</th>
+            <th>Last updated on</th>
+        </tr>
+
+        <tr *ngFor = "let singleStock of stock">
+        <td> {{singleStock.gauge}} </td>
+        <td> {{singleStock.weight}} Kg</td>
+        <td> {{singleStock.lastUpdatedOn}} </td>
+        </tr>
+
+        <tr style="background-color: rgba(255, 234, 112, 0.78)">
+            <td style="font-weight: bold">Total</td>
+            <td>{{TotalStockRemaining}} Kg</td>
+            <td>-</td>
+        </tr>
+        </table>
+    </ion-item>
+
+    </ion-list>
+
+    <!-- View All Stock :: END-->
+
+    </div>
+
+
+
+
+
+
+
+
+</ion-content>

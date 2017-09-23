@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-navbar color = 'title-bar'>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Customers</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <!--<ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>-->
+    <ion-item>
+        <div class="center" style="font-family: verdana, arial, sans-serif">Add a customer</div>
+    </ion-item>
+
+    <ion-item>
+        <ion-label color="primary" class="ion-label" floating>Customer Name</ion-label>
+        <ion-input type="text" class="ion-label" [(ngModel)]="customerName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label color="primary" class="ion-label" floating>Shop Name</ion-label>
+        <ion-input type="text" class="ion-label" [(ngModel)]="shopName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <div class= "center">
+            <button ion-button round color="blue-light" (click) = 'saveCustomer()'>Add</button>
+        </div>
+    </ion-item>
+
+
+    <ion-item>
+        <div class="center" style="font-family: verdana, arial, sans-serif" *ngIf="customers">Tap on customer for options</div>
+    </ion-item>
+
+
+
+    <ion-list>
+
+        <button ion-item class="list-button" *ngFor = "let customer of customers"  (click)="itemTapped($event, customer)">
+
+        <table *ngIf="customer.customerName">
+            <!--<tr>
+                <th>Customer</th>
+                <th>ID</th>
+                <th>Shop</th>
+            </tr>-->
+            <tr class="ion-label">
+                <td> <ion-icon [name]="personIcon" item-left></ion-icon> {{customer.customerName}} </td>
+                <td item-right style="text-align: right"> {{customer.shopName}} </td>
+            </tr>
+        </table>
+
+        </button>
+
+    </ion-list>
+
+
+</ion-content>

@@ -1,0 +1,383 @@
+<ion-header>
+    <ion-navbar color = 'title-bar'>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Records</ion-title>
+    </ion-navbar>
+    <div class="inside-title"><br>
+        Sort records by
+    </div>
+
+    <div padding>
+        <ion-segment [(ngModel)]="records">
+
+        <ion-segment-button value="customers" class="select-title">
+            Customer
+        </ion-segment-button>
+
+        <ion-segment-button value="date" class="select-title">
+            Date
+        </ion-segment-button>
+
+        <ion-segment-button value="gauge" class="select-title">
+            Gauge
+        </ion-segment-button>
+
+        <ion-segment-button value="all" class="select-title">
+            All
+        </ion-segment-button>
+
+        </ion-segment>
+    </div>
+
+</ion-header>
+
+<ion-content>
+
+
+    <div [ngSwitch]="records">
+
+    <!-- Sort by Customer :: START-->
+
+    <ion-list *ngSwitchCase="'customers'">
+
+<!--select start-->
+    <ion-item>
+        <ion-label class="ion-label">Select Customer</ion-label>
+        <ion-select interface = 'popover' [(ngModel)]="selectedCustomerForRecord">
+
+        <div *ngFor="let customer of customers">
+            <ion-option>
+                {{customer.customerName}}
+            </ion-option>
+        </div>
+
+        </ion-select>
+    </ion-item>
+    <!--select end-->
+    <ion-item>
+        <div class= "center" *ngIf = "selectedCustomerForRecord">
+        <button ion-button round color="blue-light" (click) = 'fetchRecordsForSelectedCustomer()'>Get Records</button>
+        </div>
+    </ion-item>
+
+    <ion-item *ngIf = "fullRecord">
+
+        <div *ngIf = "billRecord" class = 'customer-name div-color'>
+        <hr>{{selectedCustomerForRecord}}<hr>
+        </div>
+
+        <table class="gridtable" *ngIf="billRecord">
+            <tr>
+                <th>Date</th>
+                <th>New Rt</th>
+                <th>Old Rt</th>
+                <th>Gauge</th>
+                <th>New Wt</th>
+                <th>Old Wt</th>
+                <th>Received</th>
+                <th>Paid</th>
+            </tr>
+
+            <tr *ngFor = "let record of billRecord">
+                <td> {{record.billDate}} </td>
+                <td> {{record.rateInfo.newCopRate}} ₹</td>
+                <td> {{record.rateInfo.oldCopRate}} ₹</td>
+                <td> {{record.gauge}} </td>
+                <td> {{record.newCopperSold}} {{record.wtUnit}}</td>
+                <td class="{{record.insulator}}"> {{record.oldCopperPurchased}} {{record.wtUnit}}</td>
+                <td> {{record.amountReceived}} </td>
+                <td> {{record.amountPaid}} </td>
+            </tr>
+
+            <tr style="background-color: rgba(255, 234, 112, 0.78)">
+                <td style="font-weight: bold">Total</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>{{TotalNewCopWt}} Kg</td>
+                <td>{{TotalOldCopWt}} Kg</td>
+                <td>{{TotalAmountReceived}} ₹</td>
+                <td>{{TotalAmountPaid}} ₹</td>
+            </tr>
+        </table>
+    </ion-item>
+
+    <ion-item *ngIf = "fullRecord == false">
+
+        <div *ngIf = "billRecord" class = 'customer-name div-color'>
+            <hr>{{selectedCustomerForRecord}}<hr>
+        </div>
+
+        <table class="gridtable" *ngIf="billRecord">
+        <tr>
+            <th>Gauge</th>
+            <th>New Wt</th>
+            <th>Old Wt</th>
+            <th>Received</th>
+            <th>Paid</th>
+        </tr>
+
+        <tr *ngFor = "let record of billRecord">
+        <td> {{record.gauge}} </td>
+        <td> {{record.newCopperSold}} {{record.wtUnit}}</td>
+        <td class="{{record.insulator}}"> {{record.oldCopperPurchased}} {{record.wtUnit}}</td>
+        <td> {{record.amountReceived}} ₹</td>
+        <td> {{record.amountPaid}} ₹</td>
+        </tr>
+
+        <tr style="background-color: rgba(255, 234, 112, 0.78)">
+            <td style="font-weight: bold">Total</td>
+            <td>{{TotalNewCopWt}} Kg</td>
+            <td>{{TotalOldCopWt}} Kg</td>
+            <td>{{TotalAmountReceived}} ₹</td>
+            <td>{{TotalAmountPaid}} ₹</td>
+        </tr>
+
+        </table>
+
+    </ion-item>
+
+    <ion-item>
+        <div class= "center" *ngIf = "billRecord">
+        <button ion-button round color="blue-light" (click) = 'toggleFullRecord()'>{{recordLengthButtonName}}</button>
+        </div>
+    </ion-item>
+
+    </ion-list>
+
+    <!-- Sort by Customer :: END-->
+
+
+    <!-- Sort by Date :: START-->
+
+    <ion-list *ngSwitchCase="'date'">
+    <!--select start-->
+    <ion-item>
+        <ion-label class="ion-label">Select Month</ion-label>
+        <ion-select interface = 'popover' [(ngModel)]="selectedMonthForRecord">
+
+        <div *ngFor="let month of months">
+        <ion-option>
+            {{month}}
+        </ion-option>
+        </div>
+        </ion-select>
+    </ion-item>
+
+        <ion-item>
+            <ion-label class="ion-label">Select Year</ion-label>
+            <ion-select interface = 'popover' [(ngModel)]="selectedYearForRecord">
+                <div *ngFor="let year of years">
+                <ion-option>
+                    {{year}}
+                </ion-option>
+                </div>
+            </ion-select>
+        </ion-item>
+
+
+
+    <!--select end-->
+    <ion-item>
+        <div class= "center" *ngIf = "selectedMonthForRecord && selectedYearForRecord">
+        <button ion-button round color="blue-light" (click) = 'fetchRecordsForSelectedMonth()'>Get Records</button>
+        </div>
+    </ion-item>
+
+    <ion-item *ngIf = "fullRecord">
+
+    <div *ngIf = "monthlyBillRecord" class = 'customer-name div-color'>
+    <hr>{{selectedMonthForRecord}}<hr>
+    </div>
+
+    <table class="gridtable" *ngIf="monthlyBillRecord">
+    <tr>
+        <th>Date</th>
+        <th>Cust Name</th>
+        <th>New Rt</th>
+        <th>Old Rt</th>
+        <th>Gauge</th>
+        <th>New Wt</th>
+        <th>Old Wt</th>
+        <th>Received</th>
+        <th>Paid</th>
+    </tr>
+
+    <tr *ngFor = "let record of monthlyBillRecord">
+    <td> {{record.billDate}} </td>
+    <td> {{record.customerName}} </td>
+    <td> {{record.rateInfo.newCopRate}} ₹</td>
+    <td> {{record.rateInfo.oldCopRate}} ₹</td>
+    <td> {{record.gauge}} </td>
+    <td> {{record.newCopperSold}} {{record.wtUnit}}</td>
+    <td class="{{record.insulator}}"> {{record.oldCopperPurchased}} {{record.wtUnit}}</td>
+    <td> {{record.amountReceived}} </td>
+    <td> {{record.amountPaid}} </td>
+    </tr>
+
+    <tr style="background-color: rgba(255, 234, 112, 0.78)">
+        <td style="font-weight: bold">Total</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>{{TotalNewCopWt}} Kg</td>
+        <td>{{TotalOldCopWt}} Kg</td>
+        <td>{{TotalAmountReceived}} ₹</td>
+        <td>{{TotalAmountPaid}} ₹</td>
+    </tr>
+    </table>
+    </ion-item>
+
+    <ion-item *ngIf = "fullRecord == false">
+
+    <div *ngIf = "monthlyBillRecord" class = 'customer-name div-color'>
+    <hr>{{selectedMonthForRecord}}<hr>
+    </div>
+
+    <table class="gridtable" *ngIf="monthlyBillRecord">
+    <tr>
+        <th>Date</th>
+        <th>New Wt</th>
+        <th>Old Wt</th>
+        <th>Received</th>
+        <th>Paid</th>
+    </tr>
+
+    <tr *ngFor = "let record of monthlyBillRecord">
+    <td> {{record.billDate}} </td>
+    <td> {{record.newCopperSold}} {{record.wtUnit}}</td>
+    <td class="{{record.insulator}}"> {{record.oldCopperPurchased}} {{record.wtUnit}}</td>
+    <td> {{record.amountReceived}} ₹</td>
+    <td> {{record.amountPaid}} ₹</td>
+    </tr>
+
+    <tr style="background-color: rgba(255, 234, 112, 0.78)">
+        <td style="font-weight: bold">Total</td>
+        <td>{{TotalNewCopWtMonthlySort}} Kg</td>
+        <td>{{TotalOldCopWtMonthlySort}} Kg</td>
+        <td>{{TotalAmountReceivedMonthlySort}} ₹</td>
+        <td>{{TotalAmountPaidMonthlySort}} ₹</td>
+    </tr>
+
+    </table>
+
+    </ion-item>
+
+    <ion-item>
+        <div class= "center" *ngIf = "monthlyBillRecord">
+        <button ion-button round color="blue-light" (click) = 'toggleFullRecord()'>{{recordLengthButtonName}}</button>
+        </div>
+    </ion-item>
+
+    </ion-list>
+
+    <!-- Sort by Date :: END-->
+
+
+    <!-- Sort by Gauge :: START-->
+
+
+    <ion-list *ngSwitchCase="'gauge'">
+
+    <!--select start-->
+    <ion-item>
+        <ion-label class="ion-label">Select Gauge</ion-label>
+        <ion-select interface = 'popover' [(ngModel)]="selectedGaugeForRecord">
+
+        <div *ngFor="let thisGauge of gaugeArray">
+        <ion-option>
+            {{thisGauge}}
+        </ion-option>
+        </div>
+
+        </ion-select>
+    </ion-item>
+    <!--select end-->
+    <ion-item>
+        <div class= "center" *ngIf = "selectedGaugeForRecord">
+        <button ion-button round color="blue-light" (click) = 'fetchRecordsForSelectedGauge()'>Get Records</button>
+        </div>
+    </ion-item>
+
+    <ion-item>
+
+    <div *ngIf = "gaugeWiseBillRecord" class = 'customer-name div-color'>
+    <hr>{{selectedGaugeForRecord}}<hr>
+    </div>
+
+    <table class="gridtable" *ngIf="gaugeWiseBillRecord">
+    <tr>
+        <th>Date</th>
+        <th>Customer</th>
+        <th>Weight</th>
+        <th>Cost</th>
+    </tr>
+
+    <tr *ngFor = "let record of gaugeWiseBillRecord">
+    <td> {{record.billDate}} </td>
+    <td> {{record.customerName}} </td>
+    <td> {{record.newCopperSold}} {{record.wtUnit}}</td>
+    <td> {{record.costPerOneRecord}} ₹</td>
+    </tr>
+
+    <tr style="background-color: rgba(255, 234, 112, 0.78)">
+        <td style="font-weight: bold">Total</td>
+        <td>-</td>
+        <td>{{TotalCopWtOfGauge}} Kg</td>
+        <td>{{TotalCost}} ₹</td>
+    </tr>
+    </table>
+    </ion-item>
+
+    </ion-list>
+
+    <!-- Sort by Gauge :: END-->
+
+
+    <!-- All Records :: START-->
+    <ion-list *ngSwitchCase="'all'">
+
+    <ion-item>
+    <table class="gridtable" *ngIf="allBillRecords">
+    <tr>
+        <th>Date</th>
+        <th>Gg</th>
+        <th>New Wt</th>
+        <th>Old Wt</th>
+        <th>Received</th>
+        <th>Paid</th>
+    </tr>
+
+    <tr *ngFor = "let record of allBillRecords">
+    <td>{{record.billDate}}</td>
+    <td> {{record.gauge}} </td>
+    <td> {{record.newCopperSold}} {{record.wtUnit}}</td>
+    <td class="{{record.insulator}}"> {{record.oldCopperPurchased}} {{record.wtUnit}}</td>
+    <td> {{record.amountReceived}} ₹</td>
+    <td> {{record.amountPaid}} ₹</td>
+    </tr>
+
+    <tr style="background-color: rgba(255, 234, 112, 0.78)">
+        <td style="font-weight: bold">Total</td>
+        <td>-</td>
+        <td>{{TotalNewCopWtAll}} Kg</td>
+        <td>{{TotalOldCopWtAll}} Kg</td>
+        <td>{{TotalAmountReceivedAll}} ₹</td>
+        <td>{{TotalAmountPaidAll}} ₹</td>
+    </tr>
+
+    </table>
+
+    </ion-item>
+
+    </ion-list>
+    <!-- All Records :: END-->
+
+    </div>
+
+
+
+</ion-content>

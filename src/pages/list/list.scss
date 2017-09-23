@@ -1,0 +1,45 @@
+page-list {
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  td {
+    border: 0px solid #dddddd;
+    text-align: left;
+    padding: 1px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+    text-align: center;
+    padding: 5px;
+  }
+
+  .bckgrnd{
+    background-color: #7cff7e;
+  }
+
+  .center{
+    text-align: center;
+  }
+
+  .list-button{
+    background-color: rgb(94, 141, 255);
+    color: white;
+    font-family: verdana, arial, sans-serif;
+    border-radius: 25px;
+  }
+
+  .ion-label{
+    font-family: verdana,arial,sans-serif;
+    font-size: 90%;
+  }
+}

@@ -1,0 +1,54 @@
+page-rates {
+  .center{
+    text-align:center;
+  }
+
+  .float-right{
+    float:right;
+  }
+
+  .title-text{
+    font-family: 'arial';
+    color : black;
+    font-weight: bold;
+    font-size: 130%;
+    margin: auto;
+    padding: 25px;
+  }
+  .inside-label{
+    color : black;
+    font-weight: bold;
+    font-size: 110%;
+    margin: left;
+    width: 100%;
+  }
+
+  .textbox-label{
+    font-family: 'Apple Color Emoji';
+    font-size: 100%;
+    padding: 0px;
+  }
+
+
+  .inside-title{
+    font-family: verdana,arial,sans-serif;
+    font-size: 100%;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  .inside-content{
+    font-family: verdana,arial,sans-serif;
+    font-size: 90%;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  .card-content{
+    font-family: verdana,arial,sans-serif;
+    font-size: 90%;
+    text-align: left;
+    text-transform: capitalize;
+  }
+
+}

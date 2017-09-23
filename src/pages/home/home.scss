@@ -1,0 +1,100 @@
+page-home {
+  .title-color{
+    color: darkorange;
+    font-size: 120%;
+    font-weight: bold;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+  }
+
+  .color{
+    color : darkorange;
+  }
+
+  .inside-title{
+    font-family: verdana,arial,sans-serif;
+    font-size: 100%;
+    text-align: center;
+  }
+
+  .ion-label{
+    font-family: verdana;
+    font-size: 90%;
+    text-transform: capitalize;
+  }
+
+  .inside-label{
+    color : black;
+    font-weight: bold;
+    font-family: verdana;
+    font-size: 110%;
+    text-align: center;
+    width: 100%;
+  }
+
+
+
+  .inside-content{
+    font-family: verdana,arial,sans-serif;
+    color : black;
+    font-size: 90%;
+    text-align: center;
+  }
+
+  .inside-content-center{
+    font-family: verdana,arial,sans-serif;
+    color : black;
+    font-size: 90%;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .center{
+    text-align:center;
+  }
+
+
+
+  table.gridtable {
+    font-family: verdana,arial,sans-serif;
+    font-size:12px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  table.gridtable th {
+    border-width: 1px;
+    padding: 4px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
+  }
+  table.gridtable td {
+    border-width: 1px;
+    padding: 4px;
+    text-align: center;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
+  }
+
+
+
+  .date{
+    text-align:right;
+    font-size: 80%;
+    font-family: verdana,arial,sans-serif;
+  }
+
+  .customer-name{
+    text-align:center;
+    font-size: 130%;
+    font-weight: bold;
+  }
+
+  .div-color{
+    background-color: #9affa3;
+  }
+}
+

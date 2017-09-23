@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-navbar color = 'title-bar'>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            Settings
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+
+<br><br><br>
+    <ion-list>
+        <div class= "center">
+            <button ion-button round large full [navPush]="NavRatesPage">Manage Rates</button>
+        </div>
+
+        <br><br><br>
+<!--
+
+        <div class= "center">
+            <button ion-button large full [navPush]="NavRatesPage">Manage Customers</button>
+        </div>
+-->
+    </ion-list>
+</ion-content>

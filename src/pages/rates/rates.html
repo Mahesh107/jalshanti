@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-navbar color = 'title-bar'>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            Manage Rates
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <div class="inside-title">
+        <br>
+        Enter New Rates
+    </div>
+
+    <ion-list class="inside-content">
+        <ion-item>
+            <ion-label color="primary" floating>New copper rate</ion-label>
+            <ion-input type="number" [(ngModel)]="newCopperRate"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="primary" floating>Old copper rate</ion-label>
+            <ion-input type="number" [(ngModel)]="oldCopperRate"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <button class="ion-button-min" ion-button round color="blue-light" (click) = 'clearFields()'>Clear</button>
+            <button class="ion-button-min" ion-button round float-right color="blue-light" (click) = 'saveRates()'>Save</button>
+        </ion-item>
+
+
+        <ion-card color="card-grey">
+
+            <ion-card-header>
+                <div class="inside-content">Current rates</div>
+            </ion-card-header>
+
+            <ion-card-content class="card-content">
+                New copper : <b>{{NCR}}</b> Rs/Kg<br>
+                Old copper : <b>{{OCR}}</b> Rs/Kg<br>
+            </ion-card-content>
+
+        </ion-card>
+
+    </ion-list>
+</ion-content>

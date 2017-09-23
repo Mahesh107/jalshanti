@@ -1,0 +1,110 @@
+<ion-header>
+    <ion-navbar color = 'title-bar'>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            जलशांती इलेक्ट्रीकलस्
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <!--<div class="date">{{objDate | date: 'MMM'}}</div>-->
+    <!--<ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>-->
+
+<ion-item>
+    <div class="inside-title"> Generate Bill</div>
+</ion-item>
+        <div *ngIf = "customerInfo" class = 'customer-name div-color'><hr>{{customerInfo.customerName}}<hr></div>
+        <ion-item>
+            <ion-label class="ion-label">Weight in Kg / Gm</ion-label>
+            <ion-toggle color="secondary" [(ngModel)]="wtInKg"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+            <ion-label class="ion-label">Insulator</ion-label>
+            <ion-toggle color="secondary" [(ngModel)]="insulator"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="primary" fixed class="ion-label">New copper</ion-label>
+            <ion-input type="number" class="ion-label" placeholder="Enter Weight" [(ngModel)]="newCopperWt"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="primary" fixed class="ion-label">Old copper</ion-label>
+            <ion-input type="number" class="ion-label" placeholder="Enter Weight" [(ngModel)]="oldCopperWt"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="primary" fixed class="ion-label">Wire Gauge</ion-label>
+            <ion-input type="number" class="ion-label" placeholder="Enter Gauge" [(ngModel)]="gauge"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <div class= "center">
+                <button class="ion-button-max" ion-button round color="blue-light" *ngIf = "!((payableAmount || acceptableAmount || payableAmount ==0) && customerInfo)" (click) = 'calculate()'>Submit</button>
+            </div>
+            <button class="ion-button-min" ion-button round float-right color="blue-light" *ngIf = "(payableAmount || acceptableAmount || payableAmount ==0) && customerInfo" (click) = 'calculate()'>Submit</button>
+            <!--<div class= "center inside-content" >-->
+            <button class="ion-button-min" ion-button round color="blue-light" *ngIf = "(payableAmount || acceptableAmount || payableAmount ==0) && customerInfo" (click) = 'saveRecord()'>Save</button>
+            <!--</div>-->
+        </ion-item>
+
+
+    <ion-card color="{{cardColor}}">
+        <ion-card-header>
+            <h3 class="inside-label"> {{billTitle}} </h3>
+            <div class="date ontent" *ngIf="billMessage"><b>Date:</b> {{billDate}}</div>
+        </ion-card-header>
+
+        <ion-card-content>
+            <div class="content" *ngIf="billMessage && customerInfo"><b>Name:</b> {{customerInfo.customerName}}</div>
+            <div class="content" *ngIf="billMessage && customerInfo"><b>Shop:</b> {{customerInfo.shopName}}</div>
+            <hr style="font-weight: bold" *ngIf="billMessage">
+            <div class = "inside-content">{{defaultCardMsg}}</div>
+
+            <table class="gridtable" *ngIf="billMessage && customerInfo">
+                <tr>
+                    <th>
+                        <div class="content">Gauge</div>
+                    </th>
+                    <th>
+                        <div class="content">New Copper</div>
+                    </th>
+                    <th>
+                        <div class="content">Old Copper</div>
+                    </th>
+                </tr>
+                <tr class="content">
+                    <td>
+                        {{gauge}}
+                    </td>
+                    <td>
+                        {{NCWeight}} Kg
+                    </td>
+                    <td>
+                        {{OCWeight}} Kg
+                    </td>
+                </tr>
+            </table>
+
+
+<br>
+
+            <div class = "inside-content" *ngIf="billMessage">{{this.billMessage}} <b> {{payableAmount}} {{acceptableAmount}} </b> {{currency}}</div>
+
+            <hr><hr>
+            <div class = "inside-content-center" *ngIf="billMessage && customerInfo">
+                जलशांती इलेक्ट्रीकलस्
+                <br>
+                प्रो. प्रा.  संभाजी चव्हाण
+            </div>
+
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>
